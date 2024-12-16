@@ -1,0 +1,20 @@
+# Node.jsの公式イメージをベースにする
+FROM node:20-alpine
+
+# 作業ディレクトリを設定
+WORKDIR /app
+
+# npmパッケージをインストール
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+# アプリケーションのコードをコピー
+COPY . .
+
+# 開発サーバーを起動
+CMD ["npm", "start"]
+
+# コンテナのポートを公開
+EXPOSE 3000
